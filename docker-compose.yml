@@ -1,0 +1,72 @@
+services:
+  mysqldb:
+    image: mysql:8.4
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - ${PORT_DB}:${PORT_DB}
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - backend-network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin -u${MYSQL_USER} -p${MYSQL_PASSWORD} ping -h localhost"]
+      interval: 5s
+      timeout: 15s
+      retries: 3
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - ${PORT_BACKEND}:${PORT_BACKEND}
+    volumes:
+      - ./back-end/src:/app/src:ro
+      - ./back-end/package-lock.json:/app/package-lock.json
+      - ./back-end/package.json:/app/package.json
+      - backend-modules:/app/node_modules
+    command: npm run start # co the ghi de len CMD trong Dockerfile
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    networks:
+      - backend-network
+
+  frontend:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - ${PORT_FRONTEND}:${PORT_FRONTEND}
+    volumes:
+      - ./front-end/src:/app/src
+      - ./front-end/package-lock.json:/app/package-lock.json
+      - ./front-end/package.json:/app/package.json
+      - frontend-modules:/app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - front-end-network
+
+volumes:
+  db:
+  backend-modules:
+  frontend-modules:
+
+networks:
+  backend-network:
+    driver: bridge
+  front-end-network:
+    driver: bridge
