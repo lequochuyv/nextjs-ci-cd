@@ -1,0 +1,17 @@
+name: shell commands
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print messages
+        run: |
+          echo "Hello, world!"
+          echo "This is a sample workflow."
+
+      - name: Run shell commands
+        run: |
+          node -v
+          npm -v
