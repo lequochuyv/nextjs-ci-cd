@@ -1,0 +1,28 @@
+name: First GitHub Action
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: RUn a one-line script
+        run: echo "Hello, world!"
+
+      - name: Run a multi-line script
+        run: |
+          echo "Hello, world!"
+          echo "This is a multi-line script."
+          echo "It can run multiple commands."
+          echo "Each command is separated by a new line."
+          echo "You can also use variables and other features."
+          echo "This is a great way to automate tasks."
+          echo "GitHub Actions makes it easy to create workflows."
+
