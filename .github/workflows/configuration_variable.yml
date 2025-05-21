@@ -13,6 +13,6 @@ jobs:
       Greeting: Hello
     steps:
       - name: Run a one-line script
-        run: echo "Hello this is ${{ vars.PROJECT_NAME }}, world! ${{ vars.First_Name }} is using ${{ vars.cloud }}"
+        run: echo "Hello this is ${{ vars.PROJECT_NAME }}"
         env:
           First_Name: Huy
