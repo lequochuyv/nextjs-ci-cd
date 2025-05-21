@@ -1,10 +1,10 @@
 name: Tesing workflow variables
 
 on:
-    workflow_dispatch
+  workflow_dispatch
 
 env:
-    cloud: google-cloud-test
+  cloud: google-cloud-test
 
 jobs:
   getting-started:
@@ -12,9 +12,7 @@ jobs:
     env:
       Greeting: Hello
     steps:
-    - name: Run a one-line script
-      run: echo "$Greeting, world! $First_Name is using $cloud"
-      env:
-      	First_Name: Huy
-
-
+      - name: Run a one-line script
+        run: echo "$Greeting, world! $First_Name is using $cloud"
+        env:
+          First_Name: Huy
