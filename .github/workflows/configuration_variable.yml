@@ -1,4 +1,4 @@
-name: Tesing workflow variables
+name: Tesing workflow variables configuration
 
 on:
   workflow_dispatch
