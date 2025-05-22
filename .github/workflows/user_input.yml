@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add numbers
-        run: echo "The sum of 1 and 2 is $(${{inputs.number1}} + ${{inputs.number2}})"
+        id: sum
+        run: echo "::set-output name=sum::$(( ${{ inputs.number1 }} + ${{ inputs.number2 }} ))"
       - name: Total Numbers
         run: echo "The sum of 1 and 2 is ${{ steps.sum.outputs.sum }}"
