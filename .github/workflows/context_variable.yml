@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: "Check Context Variable"
         run: |
-          echo "Repository name: ${{ github.reposotory }}"
+          echo "Repository name: ${{ github.repository }}"
           echo "Repository name: ${{ github.workflow }}"
           echo "Repository name: ${{ github.triggering_actor }}"

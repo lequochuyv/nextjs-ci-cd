@@ -1,0 +1,19 @@
+name: Test User Input Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      number1:
+        description: 'NUmber 1 to add'
+        required: true
+        default: '0'
+      number2:
+        description: 'Number 2 to add'
+        required: true
+        default: '1'
+jobs:
+  add_numbers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add numbers
+        run: echo "The sum of 1 and 2 is $(${{inputs.number1}} + ${{inputs.number2}})"
