@@ -1,0 +1,16 @@
+name: Call Reusable Workflow
+
+on:
+  push:
+   branches: [main]
+  pull_request:
+   branches: [main]
+
+jobs:
+ use-reusable:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Call Reusable Workflow
+      uses: ./.github/workflows/reusable.yml
+      with:
+        name: Huy
