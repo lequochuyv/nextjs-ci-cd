@@ -8,9 +8,6 @@ on:
 
 jobs:
  use-reusable:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Call Reusable Workflow
-      uses: lequochuyv/nextjs-ci-cd/.github/workflows/reusable.yml@main
-      with:
-        name: Huy
+  uses: lequochuyv/nextjs-ci-cd/.github/workflows/reusable.yml@main
+  with:
+   name: Huy
